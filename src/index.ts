@@ -5,12 +5,12 @@ import { errorHandler } from "./middleware/error.middleware.js";
 import { logger } from "./middleware/logger.js";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
+import  authRoutes  from "./routes/auth.routes.js";
 
 
 dotenv.config();
 
 connectDB();
-
 
 const app = express();
 const PORT = Number(process.env.PORT);
@@ -20,6 +20,7 @@ app.use(express.json());
 app.use(logger);
 
 //routes
+app.use("/api/auth", authRoutes);
 app.use("/api/hello", helloRoutes);
 app.use("/api/todos", todoRoutes);
 
