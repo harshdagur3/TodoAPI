@@ -1,14 +1,15 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import helloRoutes from "./routes/hello.routes.js";
 import todoRoutes from "./routes/todo.routes.js"
 import { errorHandler } from "./middleware/error.middleware.js";
 import { logger } from "./middleware/logger.js";
-import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import  authRoutes  from "./routes/auth.routes.js";
 
 
-dotenv.config();
 
 connectDB();
 

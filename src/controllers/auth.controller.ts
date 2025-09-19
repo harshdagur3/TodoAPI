@@ -3,13 +3,11 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { signupSchema } from "../validations/auth.validation.js";
 import { User } from "../models/user.model.js";
+import {constants} from "../constants.js";
+
+// console.log("JWT_SECRET is:", process.env.JWT_SECRET);
 
 
-if (!process.env.JWT_SECRET) {
-    throw new Error("JWT_SECRET not set in environment");
-}
-
-const JWT_SECRET = process.env.JWT_SECRET;
 
 export const signup = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -39,7 +37,7 @@ export const login = async (req: Request, res: Response, next: NextFunction)=>{
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(401).json({ error: "Invalid credentials" });
 
-        const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "1h" });
+        const token = jwt.sign({ id: user._id }, constants.JWT_SECRET, { expiresIn: "1h" });
 
         res.json({message:"Login Successful",token})
     } catch (error) {
