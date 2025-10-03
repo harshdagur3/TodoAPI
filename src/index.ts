@@ -8,6 +8,7 @@ import { errorHandler } from "./middleware/error.middleware.js";
 import { logger } from "./middleware/logger.js";
 import connectDB from "./config/db.js";
 import  authRoutes  from "./routes/auth.routes.js";
+import { swaggerDocs } from "./config/swagger.js";
 
 
 
@@ -24,6 +25,8 @@ app.use(logger);
 app.use("/api/auth", authRoutes);
 app.use("/api/hello", helloRoutes);
 app.use("/api/todos", todoRoutes);
+
+swaggerDocs(app);
 
 app.use(errorHandler)
 
